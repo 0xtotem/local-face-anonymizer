@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0f0e" />
+    <meta name="description" content="Blur faces in photos locally in your browser. Your images stay on your device." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <title>Covered Faces — local anonymizer</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <main>
+        <section class="intro">
+          <p class="eyebrow">PRIVATE · FREE · NO ACCOUNT</p>
+          <h1>Protect faces.</h1>
+          <p class="intro-copy">Blur faces in a photo before sharing. Your image stays in your browser and is never uploaded.</p>
+        </section>
+
+        <section class="workspace" aria-label="Anonymisation de photo">
+          <div class="controls">
+            <div class="step-label"><span>01</span> YOUR PHOTOS</div>
+            <label class="dropzone" id="dropzone" for="file-input" tabindex="0">
+              <input id="file-input" type="file" accept="image/*,.heic,.heif" />
+              <span class="upload-icon" aria-hidden="true">↥</span>
+              <strong>Drop a photo here</strong>
+              <span>or choose a file from your device</span>
+              <span class="file-types">JPG · PNG · WEBP · HEIC · HEIF</span>
+            </label>
+
+            <div class="step-label second-step"><span>02</span> PRIVACY</div>
+            <fieldset class="mode-picker">
+              <legend>Choose an effect</legend>
+              <label><input type="radio" name="mode" value="blur" checked /><span class="mode-swatch blur-swatch"></span><span>Blur</span></label>
+              <label><input type="radio" name="mode" value="pixelate" /><span class="mode-swatch pixel-swatch"></span><span>Pixelate</span></label>
+            </fieldset>
+            <button class="primary-button" id="detect-button" disabled>Detect & anonymize <span aria-hidden="true">↗</span></button>
+            <p class="status" id="status" aria-live="polite">Choose a photo to begin.</p>
+
+            <div class="step-label second-step"><span>03</span> BLUR</div>
+            <div class="edit-list" id="edit-list">
+              <span class="edit-hint">Click faces to toggle blur</span>
+              <span class="edit-empty" id="edit-empty">—</span>
+              <ul id="revealed-faces"></ul>
+            </div>
+
+            <div class="step-label second-step"><span>04</span> DOWNLOAD</div>
+            <button class="export-button" id="export-button" disabled>Download PNG <span aria-hidden="true">↓</span></button>
+          </div>
+
+          <div class="preview-panel">
+            <div class="preview-head"><span>PREVIEW</span><span id="engine-status" class="engine-status">Ready</span></div>
+            <div class="preview-stage" id="preview-stage">
+              <div class="empty-preview" id="empty-preview"><span aria-hidden="true">◌</span><strong>Your preview will appear here</strong><small>Your files never leave your device.</small></div>
+              <canvas id="preview-canvas" hidden></canvas>
+              <div class="comparison-control" id="comparison-control" hidden>
+                <div class="comparison-divider" id="comparison-divider"><span aria-hidden="true">↔</span></div>
+                <input id="comparison-range" type="range" min="0" max="100" value="50" aria-label="Compare original and anonymized photo" />
+                <div class="face-markers" id="face-markers" aria-label="Face blur controls"></div>
+              </div>
+              <div class="face-count" id="face-count" hidden></div>
+            </div>
+            <div class="preview-foot"><span id="preview-caption">ORIGINAL · ANONYMIZED</span><span id="image-size"></span></div>
+          </div>
+        </section>
+
+        <section class="metadata-panel" id="metadata-panel" hidden aria-label="Photo metadata before and after processing">
+          <div class="metadata-heading"><span>METADATA CHECK</span><span id="metadata-status">Read locally on this device</span></div>
+          <div class="metadata-columns">
+            <div class="metadata-card"><h2>Before</h2><dl id="metadata-before"></dl></div>
+            <div class="metadata-card"><h2>After · PNG export</h2><dl id="metadata-after"><div class="metadata-empty">Run anonymization to inspect the exported file.</div></dl></div>
+          </div>
+        </section>
+
+      </main>
+      <footer><span>Covered Faces · Local prototype</span><span>Your files stay on your device</span></footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

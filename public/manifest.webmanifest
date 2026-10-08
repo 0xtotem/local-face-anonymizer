@@ -1,0 +1,13 @@
+{
+  "name": "Covered Faces — local anonymizer",
+  "short_name": "Covered Faces",
+  "lang": "fr",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f5f3ee",
+  "theme_color": "#f5f3ee",
+  "description": "Anonymize photos locally in your browser.",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
